@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
-    "axios": "^1.6.0",
+    "axios": "^1.7.4",
     "js-abbreviation-number": "^1.4.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",

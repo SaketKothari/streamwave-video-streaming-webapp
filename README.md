@@ -3,7 +3,7 @@ Streamwave is a video streaming web app akin to YouTube, leveraging the power of
 
 ### [Live Site](https://streamwave-sk.vercel.app/)
 
-<img src="https://github.com/SaketKothari/streamwave/assets/81709725/e72cf4f2-1030-408c-89df-1f7a532a5e80" />
+<img src="https://github.com/user-attachments/assets/b91ebfb9-7dd5-4890-87eb-2e580d134ef1" />
 
 #
 

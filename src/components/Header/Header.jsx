@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { UserButton } from '@clerk/clerk-react';
 
 import { DataContext } from '../../context/ApiContext';
 import Loader from '../../shared/Loader';
@@ -42,19 +43,16 @@ const Header = () => {
       <div className="flex items-center">
         <div className="hidden md:flex">
           <Link to="/live">
-            <p className="text-black dark:text-white text-center mr-2 mt-2">Live</p>
+            <p className="text-black dark:text-white text-center mr-2 mt-2">
+              Live
+            </p>
           </Link>
           <OnlineStatus isOnline={isOnline} />
           <ThemeSwitch theme={theme} setTheme={setTheme} />
         </div>
 
-        <div className="flex h-8 w-8 mt-1 overflow-hidden rounded-full md:ml-4">
-          <Link to={'https://github.com/SaketKothari'}>
-            <img
-              src="https://avatars.githubusercontent.com/u/81709725?v=4"
-              alt="user-icon"
-            />
-          </Link>
+        <div className="flex items-center md:ml-4">
+          <UserButton signOutUrl="/" />
         </div>
       </div>
     </div>

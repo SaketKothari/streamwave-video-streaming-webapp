@@ -1,13 +1,7 @@
-import LiveChat from './LiveChat';
+import LiveChat from "./LiveChat";
 
 const Live = () => {
-  return (
-    <>
-      <div className="w-full">
-        <LiveChat />
-      </div>
-    </>
-  );
+  return <LiveChat />;
 };
 
 export default Live;

@@ -1,24 +1,24 @@
-import { Link } from 'react-router-dom';
-import { abbreviateNumber } from 'js-abbreviation-number';
-import { BsFillCheckCircleFill } from 'react-icons/bs';
-import VideoLength from '../../shared/VideoLength';
+import { Link } from "react-router-dom";
+import { abbreviateNumber } from "js-abbreviation-number";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import VideoLength from "../../shared/VideoLength";
 
 const VideoCard = ({ video }) => {
   return (
-    <Link to={`/video/${video.videoId}`}>
-      <div className="flex flex-col mb-8">
-        <div className="relative h-48 md:h-40 md:rounded-xl overflow-hidden">
+    <Link to={`/video/${video.videoId}`} className="group">
+      <div className="flex flex-col">
+        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-800">
           <img
             src={video?.thumbnails[0]?.url}
             alt="thumbnails"
-            className="h-full w-full object-fill "
+            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-200"
           />
           {video?.lengthSeconds && <VideoLength time={video?.lengthSeconds} />}
         </div>
 
-        <div className="flex text-black dark:text-white mt-3">
-          <div className="flex items-start">
-            <div className="flex h-9 w-9 rounded-full overflow-hidden">
+        <div className="flex text-black dark:text-white mt-3 gap-3">
+          <div className="flex-shrink-0">
+            <div className="h-9 w-9 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700">
               <img
                 src={video?.author?.avatar[0]?.url}
                 alt="Avatar"
@@ -27,25 +27,23 @@ const VideoCard = ({ video }) => {
             </div>
           </div>
 
-          <div className="flex flex-col ml-3 overflow-hidden">
-            <span className="text-sm font-bold line-clamp-2">
+          <div className="flex flex-col min-w-0 flex-1">
+            <h3 className="text-sm font-medium line-clamp-2 leading-5 text-gray-900 dark:text-white">
               {video?.title}
-            </span>
+            </h3>
 
-            <span className="text-[12px] font-semibold mt-2 text-black/[0.7] dark:text-white/[0.7] flex items-center">
+            <p className="text-[13px] mt-1 text-gray-600 dark:text-gray-400 flex items-center hover:text-gray-900 dark:hover:text-gray-200">
               {video?.author?.title}
-              {video?.author?.badges[0]?.type === 'VERIFIED_CHANNEL' && (
-                <BsFillCheckCircleFill className="text-black/[0.7] dark:text-white/[0.5] text-[12px] ml-1" />
+              {video?.author?.badges[0]?.type === "VERIFIED_CHANNEL" && (
+                <BsFillCheckCircleFill className="text-gray-600 dark:text-gray-500 text-xs ml-1" />
               )}
-            </span>
+            </p>
 
-            <div className="flex text-[12px] font-semibold text-black/[0.7] dark:text-white/[0.7] truncate overflow-hidden">
-              <span>{`${abbreviateNumber(video?.stats?.views, 2)} views`}</span>
-              <span className="flex text-[24px] text-black/[0.7] dark:text-white/[0.7] font-bold leading-none relative top-[-10px] mx-1">
-                .
-              </span>
-              <span className="truncate">{video?.publishedTimeText}</span>
-            </div>
+            <p className="text-[13px] text-gray-600 dark:text-gray-400">
+              {`${abbreviateNumber(video?.stats?.views, 2)} views`}
+              <span className="mx-1">•</span>
+              {video?.publishedTimeText}
+            </p>
           </div>
         </div>
       </div>

@@ -2,13 +2,13 @@ const SidebarItem = ({ text, icon, className, action }) => {
   return (
     <div
       className={
-        'flex items-center h-10 px-3 text-white md:text-black dark:text-white text-sm cursor-pointer mb-[1px] rounded-lg hover:bg-white/[0.15] md:hover:bg-black/[0.15] dark:hover:bg-white/[0.15] ' +
+        "flex items-center h-10 px-3 gap-6 text-white md:text-gray-800 dark:text-white text-sm cursor-pointer rounded-xl hover:bg-white/10 md:hover:bg-gray-100 dark:hover:bg-white/10 transition-colors " +
         className
       }
       onClick={action}
     >
-      <span className="text-xl mr-5">{icon}</span>
-      {text}
+      <span className="text-xl flex-shrink-0">{icon}</span>
+      <span className="truncate">{text}</span>
     </div>
   );
 };

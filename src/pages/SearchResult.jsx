@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
 
-import { DataContext } from '../context/ApiContext';
-import { fetchDataFromApi } from '../utils/api';
+import { DataContext } from "../context/ApiContext";
+import { fetchDataFromApi } from "../utils/api";
 
-import Sidebar from '../components/Sidebar/Sidebar';
-import ShimmerVideoSearchResult from '../components/Shimmer/ShimmerVideoSearchResult';
-import VideoCardSearchResult from '../components/Videos/VideoCardSearchResult';
+import Sidebar from "../components/Sidebar/Sidebar";
+import ShimmerVideoSearchResult from "../components/Shimmer/ShimmerVideoSearchResult";
+import VideoCardSearchResult from "../components/Videos/VideoCardSearchResult";
 
 const SearchResult = () => {
   const [result, setResult] = useState();
@@ -14,7 +14,7 @@ const SearchResult = () => {
   const { setLoading } = useContext(DataContext);
 
   useEffect(() => {
-    document.getElementById('root').classList.remove('custom-h');
+    document.getElementById("root").classList.remove("custom-h");
     fetchSearchResults();
   }, [searchQuery]);
 
@@ -30,16 +30,16 @@ const SearchResult = () => {
     <div className="flex h-[calc(100%-56px)]">
       <Sidebar />
 
-      <div className="grow w-[calc(100%-240px)] h-full overflow-y-auto bg-white dark:bg-black">
-        <div className="grid grid-cols-1 gap-2 p-5">
-          {result === ''
+      <div className="grow w-[calc(100%-220px)] h-full overflow-y-auto bg-[#f9f9f9] dark:bg-[#0f0f0f]">
+        <div className="flex flex-col gap-2 p-4 md:p-6 max-w-5xl min-h-full">
+          {result === ""
             ? Array(20)
-                .fill('')
+                .fill("")
                 .map((e, index) => {
                   return <ShimmerVideoSearchResult key={index} />;
                 })
             : result?.map((item, index) => {
-                if (item?.type !== 'video') return false;
+                if (item?.type !== "video") return false;
                 return (
                   <VideoCardSearchResult key={index} video={item?.video} />
                 );

@@ -1,82 +1,131 @@
-import { useState } from 'react';
-import { addMessage } from '../../slices/chatSlice';
+import { useState, useRef, useEffect } from "react";
+import { IoSend } from "react-icons/io5";
+import { BsEmojiSmile } from "react-icons/bs";
+import { addMessage } from "../../slices/chatSlice";
+
+const EMOJIS = [
+  "😀",
+  "😂",
+  "😍",
+  "🥰",
+  "😎",
+  "🤩",
+  "😊",
+  "🙌",
+  "👍",
+  "👏",
+  "🔥",
+  "❤️",
+  "💯",
+  "🎉",
+  "✨",
+  "💪",
+  "😮",
+  "😢",
+  "😡",
+  "🤔",
+  "👀",
+  "🙏",
+  "💀",
+  "😭",
+  "🤣",
+  "😅",
+  "🥳",
+  "😇",
+  "🤗",
+  "😏",
+  "🫡",
+  "💜",
+];
 
 const ChatInputForm = ({ dispatch }) => {
-  const [liveMessage, setLiveMessage] = useState('');
+  const [liveMessage, setLiveMessage] = useState("");
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target)
+      ) {
+        setShowEmojiPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!liveMessage.trim()) return;
+    dispatch(
+      addMessage({
+        name: "You",
+        message: liveMessage,
+      })
+    );
+    setLiveMessage("");
+    setShowEmojiPicker(false);
+  };
+
+  const addEmoji = (emoji) => {
+    setLiveMessage((prev) => prev + emoji);
+  };
 
   return (
-    <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(
-            addMessage({
-              name: 'Bruce Wayne',
-              message: liveMessage,
-            })
-          );
-          setLiveMessage('');
-        }}
-        className="sticky top-full flex w-full items-center justify-start gap-1 border-t-[1px] border-black dark:border-white px-4 py-2 md:gap-4 md:border-[1px] md:shadow-[5px_5px_0px_0px_#4f4e4e]"
-      >
+    <form
+      onSubmit={handleSubmit}
+      className="relative flex items-center gap-2 p-3 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0f0f0f]"
+    >
+      <div className="h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-700 flex-shrink-0 overflow-hidden">
         <img
-          className="hidden aspect-square h-5 w-5 flex-shrink-0 rounded-full object-cover md:flex md:h-10 md:w-10"
+          className="h-full w-full object-cover"
           src="https://images.pexels.com/photos/18148932/pexels-photo-18148932/free-photo-of-bench-city-man-people.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="avatar"
         />
+      </div>
+      <div className="flex-1 flex items-center gap-2 bg-gray-100 dark:bg-[#272727] rounded-full px-4 py-2">
         <input
-          placeholder="Message..."
+          placeholder="Send a message..."
           value={liveMessage}
           onChange={(e) => setLiveMessage(e.target.value)}
-          className="w-full bg-transparent p-2 text-sm text-black dark:text-white !outline-none placeholder:text-gray-500 md:p-4 md:text-base"
+          className="flex-1 bg-transparent text-sm text-gray-900 dark:text-white outline-none placeholder:text-gray-500"
         />
-        <button className="hidden h-5 w-5 flex-shrink-0 items-center justify-center p-1 md:flex md:h-10 md:w-10">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-            className="h-6 w-6 text-black dark:text-white"
+        <div className="relative" ref={emojiPickerRef}>
+          <button
+            type="button"
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+            className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"
-            ></path>
-          </svg>
-        </button>
-        <button className="flex h-7 w-7 flex-shrink-0 items-center justify-center p-1 md:h-10 md:w-10">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            aria-hidden="true"
-            className="h-6 w-6 text-black dark:text-white"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"
-            ></path>
-          </svg>
-        </button>
-        <button className="flex h-7 w-7 flex-shrink-0 items-center justify-center bg-[#ae7aff] p-1 md:h-10 md:w-10">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-            className="h-6 w-6 text-white dark:text-black"
-          >
-            <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z"></path>
-          </svg>
-        </button>
-      </form>
-    </>
+            <BsEmojiSmile className="h-5 w-5" />
+          </button>
+          {showEmojiPicker && (
+            <div className="absolute bottom-10 right-0 bg-white dark:bg-[#272727] rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 p-3 w-64 z-50">
+              <div className="grid grid-cols-8 gap-1">
+                {EMOJIS.map((emoji) => (
+                  <button
+                    key={emoji}
+                    type="button"
+                    onClick={() => addEmoji(emoji)}
+                    className="text-xl hover:bg-gray-100 dark:hover:bg-gray-600 rounded p-1 transition-colors"
+                  >
+                    {emoji}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <button
+        type="submit"
+        disabled={!liveMessage.trim()}
+        className="h-9 w-9 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed transition-colors"
+      >
+        <IoSend className="h-4 w-4 text-white" />
+      </button>
+    </form>
   );
 };
 

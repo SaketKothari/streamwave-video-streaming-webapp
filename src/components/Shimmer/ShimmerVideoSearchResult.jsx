@@ -1,39 +1,39 @@
 const ShimmerVideoSearchResult = () => {
-    return (
-      <div className="flex flex-col md:flex-row mb-8 md:mb-3 rounded-xl md:p-4">
-        <div className="relative flex shrink-0 h-48 md:h-28 lg:h-40 xl:h-48 w-full md:w-48 lg:w-64 xl:w-80 rounded-xl bg-slate-500/[0.4]">
-          {/*Thumbnail*/}
+  return (
+    <div className="flex flex-col md:flex-row gap-4 p-2 md:p-3 animate-pulse">
+      <div className="flex-shrink-0 aspect-video md:w-80 lg:w-96 rounded-xl bg-gray-300 dark:bg-gray-700">
+        {/*Thumbnail*/}
+      </div>
+
+      <div className="flex flex-col flex-1 gap-3">
+        <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded w-full">
+          {/*Video Title*/}
         </div>
-  
-        <div className="flex flex-col ml-4 md:ml-6 mt-4 md:mt-0">
-          <span className="px-32 md:px-60 py-3 md:py-4 mb-1 rounded-md bg-slate-400/[0.4]">
-            {/*Video Title*/}
-          </span>
-  
-          <span className="md:pr-24 md:my-4 px-20 py-2 md:py-6 rounded-md mb-1 lg:mb-8 bg-slate-400/[0.3]">
-            {/* Video Description */}
-          </span>
-  
-          <div className=" hidden md:flex mb-2 px-10 py-2 rounded-md bg-slate-500/[0.4]">
-            {/* views and Date */}
+        <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded w-3/4">
+          {/*Video Title line 2*/}
+        </div>
+        <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded w-1/3">
+          {/* views and Date */}
+        </div>
+
+        <div className="hidden md:flex items-center gap-2 mt-1">
+          <div className="h-6 w-6 rounded-full bg-gray-300 dark:bg-gray-700">
+            {/* Avatar */}
           </div>
-  
-          <div className="hidden md:flex items-center">
-            <div className="flex items-start mr-3">
-              <div className="flex h-9 w-9 rounded-full overflow-hidden bg-slate-300/[0.4]">
-                {/* Avatar */}
-              </div>
-            </div>
-  
-            <div className="flex flex-col">
-              <span className="mt-2 flex px-16 py-2 rounded-md bg-slate-400/[0.5]">
-                {/* Channel Name */}
-              </span>
-            </div>
+          <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-24">
+            {/* Channel Name */}
           </div>
+        </div>
+
+        <div className="hidden md:block h-3 bg-gray-200 dark:bg-gray-800 rounded w-full mt-1">
+          {/* Description */}
+        </div>
+        <div className="hidden md:block h-3 bg-gray-200 dark:bg-gray-800 rounded w-2/3">
+          {/* Description line 2 */}
         </div>
       </div>
-    );
-  };
-  
-  export default ShimmerVideoSearchResult;
+    </div>
+  );
+};
+
+export default ShimmerVideoSearchResult;

@@ -1,12 +1,12 @@
-import CommentList from './CommentList';
-import { commentsData } from '../../utils/commentData';
+import CommentList from "./CommentList";
+import { commentsData } from "../../utils/commentData";
 
 const CommentContainer = () => {
   return (
-    <div className="m-5 p-2 mt-10">
-      <h1 className="text-2xl font-semibold text-black dark:text-white">
-        Comments
-      </h1>
+    <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800">
+      <h2 className="text-base font-medium text-gray-900 dark:text-white mb-4">
+        {commentsData.length} Comments
+      </h2>
       <CommentList comments={commentsData} />
     </div>
   );

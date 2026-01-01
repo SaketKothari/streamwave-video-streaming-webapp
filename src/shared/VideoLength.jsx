@@ -1,13 +1,13 @@
-import moment from 'moment/moment';
+import moment from "moment/moment";
 
 const VideoLength = ({ time }) => {
   const videoLengthInSeconds = moment()
-    .startOf('day')
+    .startOf("day")
     .seconds(time)
-    .format('H:mm:ss');
+    .format("H:mm:ss");
 
   return (
-    <div className="absolute bottom-2 right-2 bg-black py-1 px-2 text-white text-xs rounded-md">
+    <div className="absolute bottom-1.5 right-1.5 bg-black/80 py-0.5 px-1.5 text-white text-xs font-medium rounded">
       {videoLengthInSeconds}
     </div>
   );

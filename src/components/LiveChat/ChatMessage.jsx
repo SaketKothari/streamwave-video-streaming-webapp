@@ -1,23 +1,23 @@
-import { BiSolidUserCircle } from 'react-icons/bi';
+import { BiSolidUserCircle } from "react-icons/bi";
 
 const ChatMessage = ({ name, message }) => {
   return (
-    <>
-      <div className="relative p-2 md:p-3 text-[10px] md:text-xs">
-        <div className="flex items-start justify-start gap-2 text-white md:max-w-[70%] mr-0">
-          <BiSolidUserCircle className="h-5 w-5 text-black dark:text-white" />
-          <div className="flex w-full flex-col gap-1 md:gap-2">
-            <p className="text-black dark:text-white">
-              <span className="font-semibold">{name}</span>
-              <span className="text-gray-800 dark:text-gray-400 ml-2">2 minutes ago</span>
-            </p>
-            <div className="relative w-fit p-2 text-xs after:absolute after:top-0 after:border-t-[15px] after:border-t-[#121212] md:p-2 md:text-sm bg-[#343434] after:left-0 after:border-r-[15px] after:border-r-transparent">
-              {message}
-            </div>
-          </div>
+    <div className="flex items-start gap-3 py-2 px-2 hover:bg-gray-50 dark:hover:bg-white/5 rounded-lg transition-colors">
+      <BiSolidUserCircle className="h-6 w-6 flex-shrink-0 text-gray-400 dark:text-gray-500" />
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2">
+          <span className="text-[13px] font-medium text-gray-700 dark:text-gray-300">
+            {name}
+          </span>
+          <span className="text-[11px] text-gray-500 dark:text-gray-500">
+            2 min ago
+          </span>
         </div>
+        <p className="text-sm text-gray-900 dark:text-white mt-0.5 break-words">
+          {message}
+        </p>
       </div>
-    </>
+    </div>
   );
 };
 

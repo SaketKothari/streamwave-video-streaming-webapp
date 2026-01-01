@@ -1,25 +1,25 @@
 const ShimmerVideoCard = () => {
   return (
-    <div className="flex flex-col mb-8">
-      <div className="relative h-48 md:h-40 md:rounded-xl overflow-hidden bg-slate-500/[0.4]">
+    <div className="flex flex-col animate-pulse">
+      <div className="aspect-video rounded-xl bg-gray-300 dark:bg-gray-700">
         {/*Thumbnail*/}
       </div>
 
-      <div className="flex mt-3">
-        <div className="flex items-start">
-          <div className="flex h-9 w-9 rounded-full bg-slate-300/[0.4]">
-            {/*Avatar*/}
-          </div>
+      <div className="flex mt-3 gap-3">
+        <div className="h-9 w-9 rounded-full bg-gray-300 dark:bg-gray-700 flex-shrink-0">
+          {/*Avatar*/}
         </div>
 
-        <div className="flex flex-col ml-3">
-          <span className="bg-slate-400/[0.4] rounded-md py-2 px-32 md:px-[90px]">
+        <div className="flex flex-col flex-1 gap-2">
+          <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-full">
             {/*Video Title*/}
-          </span>
-
-          <span className="mt-2 flex bg-slate-500/[0.4] rounded-md py-2 px-32 md:px-[90px] ">
+          </div>
+          <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4">
+            {/*Video Title line 2*/}
+          </div>
+          <div className="h-3 bg-gray-200 dark:bg-gray-800 rounded w-1/2 mt-1">
             {/*Author Details*/}
-          </span>
+          </div>
         </div>
       </div>
     </div>

@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { IoIosSearch, IoMdSearch } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { IoIosSearch, IoMdSearch } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { cacheResults } from '../../slices/searchSlice';
-import { fetchDataFromApi } from '../../utils/api';
+import { cacheResults } from "../../slices/searchSlice";
+import { fetchDataFromApi } from "../../utils/api";
 
 const SearchInput = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -17,7 +17,7 @@ const SearchInput = () => {
   const navigate = useNavigate();
 
   const searchQueryHandler = (event) => {
-    if (event?.key === 'Enter' && searchQuery.length > 0) {
+    if (event?.key === "Enter" && searchQuery.length > 0) {
       navigate(`/searchResult/${searchQuery}`);
     }
   };
@@ -32,7 +32,7 @@ const SearchInput = () => {
     setSearchQuery(event.target.innerText);
     setShowSuggestions(false);
     navigate(
-      '/searchResult/${searchQuery}' + encodeURI(event.target.innerText)
+      "/searchResult/${searchQuery}" + encodeURI(event.target.innerText)
     );
   };
 
@@ -61,13 +61,13 @@ const SearchInput = () => {
       // updating the cache
       dispatch(cacheResults({ [searchQuery]: data?.results }));
     } catch (error) {
-      console.error('Error fetching search suggestions:', error);
+      console.error("Error fetching search suggestions:", error);
     }
   };
 
   return (
     <>
-      <div className="flex h-8 md:h-10 md:ml-10 md:pl-5 border border-[#404040] rounded-l-3xl">
+      <div className="flex h-10 border border-gray-300 dark:border-[#303030] rounded-l-full focus-within:border-blue-500 dark:focus-within:border-blue-500 focus-within:shadow-inner transition-colors">
         <input
           type="text"
           value={searchQuery}
@@ -76,27 +76,27 @@ const SearchInput = () => {
           onKeyUp={searchQueryHandler}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setShowSuggestions(false)}
-          className="w-44 px-5 bg-transparent outline-none text-black dark:text-white md:pl-0 md:group-focus-within:pl-0 md:w-64 lg:w-[500px]"
+          className="w-28 sm:w-40 md:w-64 lg:w-[400px] xl:w-[500px] pl-4 pr-2 bg-transparent outline-none text-black dark:text-white placeholder:text-gray-500"
         />
       </div>
       <button
         onClick={searchQueryHandler2}
-        className="w-[40px] md:w-[60px] h-8 md:h-10 flex items-center justify-center border border-l-0 border-[#404040] rounded-r-3xl bg-black/[0.1] dark:bg-white/[0.15]"
+        className="w-12 md:w-16 h-10 flex items-center justify-center border border-l-0 border-gray-300 dark:border-[#303030] rounded-r-full bg-gray-100 dark:bg-[#222222] hover:bg-gray-200 dark:hover:bg-[#3a3a3a] transition-colors"
       >
-        <IoIosSearch className="text-black/[0.9] dark:text-white text-xl" />
+        <IoIosSearch className="text-gray-600 dark:text-white text-xl" />
       </button>
 
       {showSuggestions && suggestions?.length > 0 && (
-        <div className="fixed bg-white w-[18rem] md:w-[33rem] max-h-[350px] shadow-lg border rounded-2xl overflow-y-auto mt-[26rem] md:mt-[26rem]   ml-[-2rem] md:ml-[2rem] z-50 text-left">
-          <ul className="py-3">
+        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white dark:bg-[#212121] w-[92vw] max-w-[600px] max-h-[400px] shadow-xl border border-gray-200 dark:border-[#303030] rounded-xl overflow-y-auto z-50">
+          <ul className="py-2">
             {suggestions?.map((sugg) => (
               <li
                 key={sugg}
                 onMouseDown={(e) => handleSuggestion(e)}
-                className="my-1 p-1 hover:bg-gray-100 cursor-pointer"
+                className="px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-[#3a3a3a] cursor-pointer flex items-center gap-4 text-sm text-black dark:text-white"
               >
-                <IoMdSearch className="mr-5 h-4 ml-3 inline-block" />
-                <span>{sugg}</span>
+                <IoMdSearch className="h-5 w-5 flex-shrink-0 text-gray-500 dark:text-gray-400" />
+                <span className="truncate font-medium">{sugg}</span>
               </li>
             ))}
           </ul>
